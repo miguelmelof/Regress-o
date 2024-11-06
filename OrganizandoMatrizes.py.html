@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>OrganizandoMatrizes.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #7a7e85;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+OrganizandoMatrizes.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">numpy </span><span class="s0">as </span><span class="s1">np</span>
+<span class="s0">import </span><span class="s1">pandas </span><span class="s0">as </span><span class="s1">pd</span>
+<span class="s0">import </span><span class="s1">os</span>
+
+<span class="s2"># Caminho completo para o arquivo na Área de Trabalho</span>
+<span class="s1">caminho_arquivo </span><span class="s3">= </span><span class="s1">os</span><span class="s3">.</span><span class="s1">path</span><span class="s3">.</span><span class="s1">join</span><span class="s3">(</span><span class="s1">os</span><span class="s3">.</span><span class="s1">path</span><span class="s3">.</span><span class="s1">expanduser</span><span class="s3">(</span><span class="s4">&quot;~&quot;</span><span class="s3">), </span><span class="s4">&quot;Desktop&quot;</span><span class="s3">, </span><span class="s4">&quot;aerogerador.dat&quot;</span><span class="s3">)</span>
+
+<span class="s2"># Carregar e organizar os dados</span>
+<span class="s0">try</span><span class="s3">:</span>
+    <span class="s2"># Carregar o arquivo de dados</span>
+    <span class="s1">data </span><span class="s3">= </span><span class="s1">pd</span><span class="s3">.</span><span class="s1">read_csv</span><span class="s3">(</span><span class="s1">caminho_arquivo</span><span class="s3">, </span><span class="s1">sep</span><span class="s3">=</span><span class="s4">'</span><span class="s0">\t</span><span class="s4">'</span><span class="s3">, </span><span class="s1">header</span><span class="s3">=</span><span class="s0">None</span><span class="s3">)</span>
+    <span class="s1">data</span><span class="s3">.</span><span class="s1">columns </span><span class="s3">= [</span><span class="s4">'velocidade'</span><span class="s3">, </span><span class="s4">'potencia'</span><span class="s3">]  </span><span class="s2"># Ajuste os nomes das colunas</span>
+
+    <span class="s2"># Matriz de variáveis independentes (X) e vetor de variável dependente (y)</span>
+    <span class="s1">X </span><span class="s3">= </span><span class="s1">data</span><span class="s3">[[</span><span class="s4">'velocidade'</span><span class="s3">]].</span><span class="s1">values  </span><span class="s2"># Matriz X com dimensão (N, p), onde p = 1</span>
+    <span class="s1">y </span><span class="s3">= </span><span class="s1">data</span><span class="s3">[[</span><span class="s4">'potencia'</span><span class="s3">]].</span><span class="s1">values    </span><span class="s2"># Vetor y com dimensão (N, 1)</span>
+
+    <span class="s2"># Exibindo as formas de X e y para confirmação</span>
+    <span class="s1">print</span><span class="s3">(</span><span class="s4">&quot;Forma de X:&quot;</span><span class="s3">, </span><span class="s1">X</span><span class="s3">.</span><span class="s1">shape</span><span class="s3">)</span>
+    <span class="s1">print</span><span class="s3">(</span><span class="s4">&quot;Forma de y:&quot;</span><span class="s3">, </span><span class="s1">y</span><span class="s3">.</span><span class="s1">shape</span><span class="s3">)</span>
+
+<span class="s0">except </span><span class="s1">FileNotFoundError</span><span class="s3">:</span>
+    <span class="s1">print</span><span class="s3">(</span><span class="s4">&quot;Arquivo 'aerogerador.dat' não encontrado na Área de Trabalho.&quot;</span><span class="s3">)</span>
+<span class="s0">except </span><span class="s1">KeyError </span><span class="s0">as </span><span class="s1">e</span><span class="s3">:</span>
+    <span class="s1">print</span><span class="s3">(</span><span class="s4">f&quot;Erro de coluna: </span><span class="s0">{</span><span class="s1">e</span><span class="s0">}</span><span class="s4">. Verifique os nomes das colunas.&quot;</span><span class="s3">)</span>
+</pre>
+</body>
+</html>
